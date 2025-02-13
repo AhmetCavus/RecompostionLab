@@ -1,12 +1,10 @@
 package com.yapptek.recompositionlab.ui.screen
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -70,6 +68,24 @@ fun ScreenCoordinator(
                         Modifier.padding(innerPadding),
                     )
                 }
+                composable<Screen.BestPerformingScreen> {
+                    BestPerformingScreen(
+                        viewModel,
+                        Modifier.padding(innerPadding),
+                    )
+                }
+                composable<Screen.NonRestartableListItemScreen> {
+                    NonRestartableListItemScreen(
+                        Modifier.padding(innerPadding),
+                    )
+                }
+                composable<Screen.MoveableListItemScreen> {
+                    val items = remember { (0..1000).map { ListItem(it, "Item $it") } }
+                    MoveableListItemScreen(
+                        items = items,
+                        modifier = Modifier.padding(innerPadding),
+                    )
+                }
             }
         }
     }
@@ -85,6 +101,12 @@ sealed interface Screen {
 
     @Serializable
     data object BestPerformingScreen : Screen
+
+    @Serializable
+    data object NonRestartableListItemScreen : Screen
+
+    @Serializable
+    data object MoveableListItemScreen : Screen
 }
 
 @Composable
@@ -120,6 +142,24 @@ fun BottomNavigationBar(navController: NavHostController) {
                     selectedTabIndex = 2}
             ) {
                 Text("3")
+            }
+            Tab(
+                modifier = Modifier.height(64.dp),
+                selected = selectedTabIndex == 3,
+                onClick = {
+                    navController.navigate(Screen.NonRestartableListItemScreen)
+                    selectedTabIndex = 3}
+            ) {
+                Text("4")
+            }
+            Tab(
+                modifier = Modifier.height(64.dp),
+                selected = selectedTabIndex == 4,
+                onClick = {
+                    navController.navigate(Screen.MoveableListItemScreen)
+                    selectedTabIndex = 4}
+            ) {
+                Text("5")
             }
         }
     }
