@@ -1,8 +1,9 @@
 package com.yapptek.recompositionlab.domain
 
 import com.yapptek.recompositionlab.data.SubscriptionRepository
+import javax.inject.Inject
 
-class SubscriptionUseCase(private val subscriptionRepository: SubscriptionRepository) {
+class SubscriptionUseCase @Inject constructor(private val subscriptionRepository: SubscriptionRepository) {
 
     suspend fun subscribeForUpdates(shouldSubscribe: Boolean) {
         subscriptionRepository.subscribeForUpdates(shouldSubscribe)

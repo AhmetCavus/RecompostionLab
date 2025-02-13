@@ -4,15 +4,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.yapptek.recompositionlab.data.SubscriptionRepository
-import com.yapptek.recompositionlab.domain.SubscriptionUseCase
+import androidx.activity.viewModels
 import com.yapptek.recompositionlab.ui.screen.ScreenCoordinator
 import com.yapptek.recompositionlab.ui.theme.RecompositionLabTheme
 import com.yapptek.recompositionlab.ui.viewmodel.ScreenViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    val viewModel: ScreenViewModel = ScreenViewModel(SubscriptionUseCase(SubscriptionRepository()))
+    private val viewModel: ScreenViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,8 +1,9 @@
 package com.yapptek.recompositionlab.data
 
 import kotlinx.coroutines.delay
+import javax.inject.Inject
 
-class SubscriptionRepository {
+class SubscriptionRepository @Inject constructor() {
     private var isSubscribed = false
 
     suspend fun subscribeForUpdates(shouldSubscribe: Boolean) {
