@@ -32,11 +32,12 @@ import androidx.compose.ui.res.stringResource
 import com.yapptek.recompositionlab.R
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.yapptek.recompositionlab.ui.viewmodel.SubscriptionState
 
 @Composable
 fun BestPerformingScreen(
-    viewModel: ScreenViewModel,
+    viewModel: ScreenViewModel = hiltViewModel(),
     modifier : Modifier = Modifier,
 ) {
     val subscriptionState = viewModel.subscriptionState.collectAsStateWithLifecycle()

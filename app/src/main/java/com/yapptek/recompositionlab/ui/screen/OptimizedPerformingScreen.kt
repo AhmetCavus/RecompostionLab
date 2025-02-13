@@ -29,13 +29,14 @@ import com.yapptek.recompositionlab.ui.theme.RecompositionLabTheme
 import com.yapptek.recompositionlab.ui.viewmodel.ScreenViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.yapptek.recompositionlab.data.SubscriptionRepository
 import com.yapptek.recompositionlab.domain.SubscriptionUseCase
 import com.yapptek.recompositionlab.ui.viewmodel.SubscriptionState
 
 @Composable
 fun OptimizedPerformingScreen(
-    viewModel: ScreenViewModel,
+    viewModel: ScreenViewModel = hiltViewModel(),
     modifier: Modifier = Modifier,
 ) {
     val subscriptionState by viewModel.subscriptionState.collectAsStateWithLifecycle()

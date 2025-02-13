@@ -22,17 +22,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.yapptek.recompositionlab.data.SubscriptionRepository
-import com.yapptek.recompositionlab.domain.SubscriptionUseCase
 import com.yapptek.recompositionlab.ui.theme.RecompositionLabTheme
-import com.yapptek.recompositionlab.ui.viewmodel.ScreenViewModel
 import kotlinx.serialization.Serializable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScreenCoordinator(
-    viewModel: ScreenViewModel
-) {
+fun ScreenCoordinator() {
     val navController = rememberNavController()
     RecompositionLabTheme {
         Scaffold(
@@ -51,28 +46,16 @@ fun ScreenCoordinator(
                 startDestination = Screen.PoorlyPerformingScreen,
             ) {
                 composable<Screen.PoorlyPerformingScreen> {
-                    PoorlyPerformingScreen(
-                        viewModel,
-                        Modifier.padding(innerPadding),
-                    )
+                    PoorlyPerformingScreen(modifier = Modifier.padding(innerPadding),)
                 }
                 composable<Screen.OptimisedPerformingScreen> {
-                    OptimizedPerformingScreen(
-                        viewModel,
-                        Modifier.padding(innerPadding),
-                    )
+                    OptimizedPerformingScreen(modifier = Modifier.padding(innerPadding))
                 }
                 composable<Screen.BestPerformingScreen> {
-                    BestPerformingScreen(
-                        viewModel,
-                        Modifier.padding(innerPadding),
-                    )
+                    BestPerformingScreen(modifier = Modifier.padding(innerPadding))
                 }
                 composable<Screen.BestPerformingScreen> {
-                    BestPerformingScreen(
-                        viewModel,
-                        Modifier.padding(innerPadding),
-                    )
+                    BestPerformingScreen(modifier = Modifier.padding(innerPadding))
                 }
                 composable<Screen.NonRestartableListItemScreen> {
                     NonRestartableListItemScreen(
@@ -168,5 +151,7 @@ fun BottomNavigationBar(navController: NavHostController) {
 @Preview
 @Composable
 fun ScreenCoordinatorPreview() {
-    ScreenCoordinator(ScreenViewModel(SubscriptionUseCase(SubscriptionRepository())))
+    RecompositionLabTheme {
+        ScreenCoordinator()
+    }
 }
