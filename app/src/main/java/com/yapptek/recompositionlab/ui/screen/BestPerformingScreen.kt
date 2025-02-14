@@ -26,7 +26,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.yapptek.recompositionlab.data.SubscriptionRepository
 import com.yapptek.recompositionlab.domain.SubscriptionUseCase
 import com.yapptek.recompositionlab.ui.theme.RecompositionLabTheme
-import com.yapptek.recompositionlab.ui.viewmodel.ScreenViewModel
+import com.yapptek.recompositionlab.ui.viewmodel.SubscriptionViewModel
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import com.yapptek.recompositionlab.R
@@ -37,7 +37,7 @@ import com.yapptek.recompositionlab.ui.viewmodel.SubscriptionState
 
 @Composable
 fun BestPerformingScreen(
-    viewModel: ScreenViewModel = hiltViewModel(),
+    viewModel: SubscriptionViewModel = hiltViewModel(),
     modifier : Modifier = Modifier,
 ) {
     val subscriptionState = viewModel.subscriptionState.collectAsStateWithLifecycle()
@@ -145,6 +145,6 @@ private fun UpdateDataButton(isLoadingState: State<Boolean>, onClick: () -> Unit
 @Composable
 fun PreviewBestPerformingScreen() {
     RecompositionLabTheme {
-        PoorlyPerformingScreen(ScreenViewModel(SubscriptionUseCase(SubscriptionRepository())))
+        PoorlyPerformingScreen(SubscriptionViewModel(SubscriptionUseCase(SubscriptionRepository())))
     }
 }

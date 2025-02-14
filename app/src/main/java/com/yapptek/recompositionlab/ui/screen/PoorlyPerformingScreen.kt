@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.yapptek.recompositionlab.R
 import com.yapptek.recompositionlab.ui.theme.RecompositionLabTheme
-import com.yapptek.recompositionlab.ui.viewmodel.ScreenViewModel
+import com.yapptek.recompositionlab.ui.viewmodel.SubscriptionViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -36,7 +36,7 @@ import com.yapptek.recompositionlab.ui.viewmodel.PoorlyDesignedState
 
 @Composable
 fun PoorlyPerformingScreen(
-    viewModel: ScreenViewModel = hiltViewModel(),
+    viewModel: SubscriptionViewModel = hiltViewModel(),
     modifier : Modifier = Modifier,
 ) {
     val uiState by viewModel.poorlyDesignedUiState.collectAsStateWithLifecycle()
@@ -108,6 +108,6 @@ fun PoorlyPerformingScreen(
 @Composable
 fun PreviewPoorlyPerformingScreen() {
     RecompositionLabTheme {
-        PoorlyPerformingScreen(ScreenViewModel(SubscriptionUseCase(SubscriptionRepository())))
+        PoorlyPerformingScreen(SubscriptionViewModel(SubscriptionUseCase(SubscriptionRepository())))
     }
 }

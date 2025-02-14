@@ -62,12 +62,15 @@ fun ScreenCoordinator() {
                         Modifier.padding(innerPadding),
                     )
                 }
-                composable<Screen.MoveableListItemScreen> {
+                composable<Screen.MovableListItemScreen> {
                     val items = remember { (0..1000).map { ListItem(it, "Item $it") } }
                     MoveableListItemScreen(
                         items = items,
                         modifier = Modifier.padding(innerPadding),
                     )
+                }
+                composable<Screen.CounterScreen> {
+                    CounterScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -89,7 +92,10 @@ sealed interface Screen {
     data object NonRestartableListItemScreen : Screen
 
     @Serializable
-    data object MoveableListItemScreen : Screen
+    data object MovableListItemScreen : Screen
+
+    @Serializable
+    data object CounterScreen : Screen
 }
 
 @Composable
@@ -139,10 +145,19 @@ fun BottomNavigationBar(navController: NavHostController) {
                 modifier = Modifier.height(64.dp),
                 selected = selectedTabIndex == 4,
                 onClick = {
-                    navController.navigate(Screen.MoveableListItemScreen)
+                    navController.navigate(Screen.MovableListItemScreen)
                     selectedTabIndex = 4}
             ) {
                 Text("5")
+            }
+            Tab(
+                modifier = Modifier.height(64.dp),
+                selected = selectedTabIndex == 5,
+                onClick = {
+                    navController.navigate(Screen.CounterScreen)
+                    selectedTabIndex = 5}
+            ) {
+                Text("6")
             }
         }
     }
